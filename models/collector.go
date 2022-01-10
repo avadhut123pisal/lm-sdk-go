@@ -18,6 +18,9 @@ import (
 // swagger:model Collector
 type Collector struct {
 
+	CollectorType string `json:"collectorType,omitempty"`
+	Format string `json:"format,omitempty"`
+
 	// The comment associated with the Collector acknowledgement (if it is in alert and acknowledged)
 	// Read Only: true
 	AckComment string `json:"ackComment,omitempty"`

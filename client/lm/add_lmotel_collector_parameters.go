@@ -8,7 +8,7 @@ package lm
 import (
 	"net/http"
 	"time"
-	"crypto/tls"
+	// "crypto/tls"
 	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
@@ -20,57 +20,58 @@ import (
 	models "github.com/logicmonitor/lm-sdk-go/models"
 )
 
-// NewAddCollectorParams creates a new AddCollectorParams object
+// NewAddLmotelCollectorParams creates a new AddLmotelCollectorParams object
 // with the default values initialized.
-func NewAddCollectorParams() *AddCollectorParams {
+func NewAddLmotelCollectorParams() *AddLmotelCollectorParams {
 	var ()
+	/*
 	transport := http.DefaultTransport.(*http.Transport).Clone()
     transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12}
     clientTransport := (http.RoundTripper)(transport)
 	httpClient := &http.Client{Transport: clientTransport, Timeout: 0}
-
-	return &AddCollectorParams{
-		HTTPClient: httpClient,
+	*/
+	return &AddLmotelCollectorParams{
+		// HTTPClient: httpClient,
 		timeout: cr.DefaultTimeout,
 	}
 }
 
-// NewAddCollectorParamsWithTimeout creates a new AddCollectorParams object
+// NewAddLmotelCollectorParamsWithTimeout creates a new AddLmotelCollectorParams object
 // with the default values initialized, and the ability to set a timeout on a request
-func NewAddCollectorParamsWithTimeout(timeout time.Duration) *AddCollectorParams {
+func NewAddLmotelCollectorParamsWithTimeout(timeout time.Duration) *AddLmotelCollectorParams {
 	var ()
-	return &AddCollectorParams{
+	return &AddLmotelCollectorParams{
 
 		timeout: timeout,
 	}
 }
 
-// NewAddCollectorParamsWithContext creates a new AddCollectorParams object
+// NewAddLmotelCollectorParamsWithContext creates a new AddLmotelCollectorParams object
 // with the default values initialized, and the ability to set a context for a request
-func NewAddCollectorParamsWithContext(ctx context.Context) *AddCollectorParams {
+func NewAddLmotelCollectorParamsWithContext(ctx context.Context) *AddLmotelCollectorParams {
 	var ()
-	return &AddCollectorParams{
+	return &AddLmotelCollectorParams{
 
 		Context: ctx,
 	}
 }
 
-// NewAddCollectorParamsWithHTTPClient creates a new AddCollectorParams object
+// NewAddLmotelCollectorParamsWithHTTPClient creates a new AddLmotelCollectorParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
-func NewAddCollectorParamsWithHTTPClient(client *http.Client) *AddCollectorParams {
+func NewAddLmotelCollectorParamsWithHTTPClient(client *http.Client) *AddLmotelCollectorParams {
 	var ()
-	return &AddCollectorParams{
+	return &AddLmotelCollectorParams{
 		HTTPClient: client,
 	}
 }
 
-/*AddCollectorParams contains all the parameters to send to the API endpoint
+/*AddLmotelCollectorParams contains all the parameters to send to the API endpoint
 for the add collector operation typically these are written to a http.Request
 */
-type AddCollectorParams struct {
+type AddLmotelCollectorParams struct {
 
 	/*Body*/
-	Body *models.Collector
+	Body *models.LmotelCollector
 
 	timeout    time.Duration
 	Context    context.Context
@@ -78,51 +79,51 @@ type AddCollectorParams struct {
 }
 
 // WithTimeout adds the timeout to the add collector params
-func (o *AddCollectorParams) WithTimeout(timeout time.Duration) *AddCollectorParams {
+func (o *AddLmotelCollectorParams) WithTimeout(timeout time.Duration) *AddLmotelCollectorParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
 // SetTimeout adds the timeout to the add collector params
-func (o *AddCollectorParams) SetTimeout(timeout time.Duration) {
+func (o *AddLmotelCollectorParams) SetTimeout(timeout time.Duration) {
 	o.timeout = timeout
 }
 
 // WithContext adds the context to the add collector params
-func (o *AddCollectorParams) WithContext(ctx context.Context) *AddCollectorParams {
+func (o *AddLmotelCollectorParams) WithContext(ctx context.Context) *AddLmotelCollectorParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the add collector params
-func (o *AddCollectorParams) SetContext(ctx context.Context) {
+func (o *AddLmotelCollectorParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
 
 // WithHTTPClient adds the HTTPClient to the add collector params
-func (o *AddCollectorParams) WithHTTPClient(client *http.Client) *AddCollectorParams {
+func (o *AddLmotelCollectorParams) WithHTTPClient(client *http.Client) *AddLmotelCollectorParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
 // SetHTTPClient adds the HTTPClient to the add collector params
-func (o *AddCollectorParams) SetHTTPClient(client *http.Client) {
+func (o *AddLmotelCollectorParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
 // WithBody adds the body to the add collector params
-func (o *AddCollectorParams) WithBody(body *models.Collector) *AddCollectorParams {
+func (o *AddLmotelCollectorParams) WithBody(body *models.LmotelCollector) *AddLmotelCollectorParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the add collector params
-func (o *AddCollectorParams) SetBody(body *models.Collector) {
+func (o *AddLmotelCollectorParams) SetBody(body *models.LmotelCollector) {
 	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
-func (o *AddCollectorParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *AddLmotelCollectorParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

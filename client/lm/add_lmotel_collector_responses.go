@@ -8,7 +8,7 @@ package lm
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
+	//"io/ioutil"
 	"log"
 	"github.com/go-openapi/runtime"
 
@@ -18,30 +18,31 @@ import (
 )
 
 // AddCollectorReader is a Reader for the AddCollector structure.
-type AddCollectorReader struct {
+type AddLmotelCollectorReader struct {
 	formats strfmt.Registry
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *AddCollectorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *AddLmotelCollectorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 
-	responseData, err := ioutil.ReadAll(response.Body())
-    if err != nil {
-        log.Fatal(err)
-    }
-    responseString := string(responseData)
-    log.Println(responseString)
+	// responseData, err := ioutil.ReadAll(response.Body())
+    // if err != nil {
+    //     log.Fatal(err)
+    // }
+    // responseString := string(responseData)
+    // log.Println(responseString)
 	switch response.Code() {
 
 	case 200:
-		result := NewAddCollectorOK()
+		result := NewAddLmotelCollectorOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		log.Println(result.Payload)
 		return result, nil
 
 	default:
-		result := NewAddCollectorDefault(response.Code())
+		result := NewAddLmotelCollectorDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -53,25 +54,25 @@ func (o *AddCollectorReader) ReadResponse(response runtime.ClientResponse, consu
 }
 
 // NewAddCollectorOK creates a AddCollectorOK with default headers values
-func NewAddCollectorOK() *AddCollectorOK {
-	return &AddCollectorOK{}
+func NewAddLmotelCollectorOK() *AddLmotelCollectorOK {
+	return &AddLmotelCollectorOK{}
 }
 
 /*AddCollectorOK handles this case with default header values.
 
 successful operation
 */
-type AddCollectorOK struct {
-	Payload *models.Collector // Lmotel colector model file
+type AddLmotelCollectorOK struct {
+	Payload *models.LmotelCollectorData // Lmotel colector model file
 }
 
-func (o *AddCollectorOK) Error() string {
-	return fmt.Sprintf("[POST /setting/collector/collectors][%d] addCollectorOK  %+v", 200, o.Payload)
+func (o *AddLmotelCollectorOK) LmotelError() string {
+	return fmt.Sprintf("[POST /setting/collectors/collector][%d] addLMotelCollectorOK  %+v", 200, o.Payload)
 }
 
-func (o *AddCollectorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddLmotelCollectorOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Collector)
+	o.Payload = new(models.LmotelCollectorData)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -82,7 +83,7 @@ func (o *AddCollectorOK) readResponse(response runtime.ClientResponse, consumer 
 }
 
 // NewAddCollectorDefault creates a AddCollectorDefault with default headers values
-func NewAddCollectorDefault(code int) *AddCollectorDefault {
+func NewAddLmotelCollectorDefault(code int) *AddCollectorDefault {
 	return &AddCollectorDefault{
 		_statusCode: code,
 	}
@@ -92,22 +93,22 @@ func NewAddCollectorDefault(code int) *AddCollectorDefault {
 
 Error
 */
-type AddCollectorDefault struct {
+type AddLmotelCollectorDefault struct {
 	_statusCode int
 
 	Payload *models.ErrorResponse
 }
 
 // Code gets the status code for the add collector default response
-func (o *AddCollectorDefault) Code() int {
+func (o *AddLmotelCollectorDefault) LmotelCode() int {
 	return o._statusCode
 }
 
-func (o *AddCollectorDefault) Error() string {
-	return fmt.Sprintf("[POST /setting/collector/collectors][%d] addCollector default  %+v", o._statusCode, o.Payload)
+func (o *AddLmotelCollectorDefault) LmotelError() string {
+	return fmt.Sprintf("[POST /setting/collector/collectors][%d] addLmotelCollector default  %+v", o._statusCode, o.Payload)
 }
 
-func (o *AddCollectorDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddLmotelCollectorDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ErrorResponse)
 

@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+	"log"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -73,6 +74,8 @@ func (c *Config) SetAccountDomain(accountDomain *string) {
 func New(c *Config) *LMSdkGo {
 	transport := httptransport.New(c.TransportCfg.Host, c.TransportCfg.BasePath, c.TransportCfg.Schemes)
 	authInfo := LMv1Auth(*c.AccessID, *c.AccessKey)
+	//transport.Producers["application/version4+json"] = runtime.JSONProducer()
+	// transport.Producers["application/json; charset=utf-8"] = runtime.JSONProducer()
 
 	cli := new(LMSdkGo)
 	cli.Transport = transport
@@ -171,6 +174,7 @@ func LMv1Auth(accessId, accessKey string) runtime.ClientAuthInfoWriter {
 		hexDigest := hex.EncodeToString(h.Sum(nil))
 		signature := base64.StdEncoding.EncodeToString([]byte(hexDigest))
 		r.SetHeaderParam("Authorization", fmt.Sprintf("LMv1 %s:%s:%s", accessId, signature, epoch))
-		return r.SetHeaderParam("X-version", "2")
+		log.Printf("LMv1 %s:%s:%s", accessId, signature, epoch)
+		return r.SetHeaderParam("X-version", "4")
 	})
 }

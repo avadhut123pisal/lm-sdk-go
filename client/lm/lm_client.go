@@ -7,8 +7,9 @@ package lm
 
 import (
 	"io"
-
+	"log"
 	"github.com/go-openapi/runtime"
+
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -231,6 +232,39 @@ func (a *Client) AddCollector(params *AddCollectorParams) (*AddCollectorOK, erro
 		return nil, err
 	}
 	return result.(*AddCollectorOK), nil
+
+}
+
+/*
+AddLmotelCollector adds collector
+*/
+func (a *Client) AddLmotelCollector(params *AddLmotelCollectorParams) (*AddLmotelCollectorOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddLmotelCollectorParams()
+	}
+	log.Println(params)
+
+	
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "addCollector",
+		Method:             "POST",
+		PathPattern:        "/setting/collectors/collector",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AddLmotelCollectorReader{formats: a.formats}, // Need to add new file add_lmotel_collector_responses.go
+		AuthInfo:           a.authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	//log.Println(result)
+	return result.(*AddLmotelCollectorOK), nil
 
 }
 
@@ -985,6 +1019,35 @@ func (a *Client) DeleteCollectorByID(params *DeleteCollectorByIDParams) (*Delete
 		return nil, err
 	}
 	return result.(*DeleteCollectorByIDOK), nil
+
+}
+
+/*
+DeleteLmotelCollectorByID deletes collector
+*/
+func (a *Client) DeleteLmotelCollectorByID(params *DeleteLmotelCollectorByIDParams) (*DeleteLmotelCollectorByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteLmotelCollectorByIDParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteCollectorById",
+		Method:             "DELETE",
+		PathPattern:        "/setting/collectors/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteLmotelCollectorByIDReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteLmotelCollectorByIDOK), nil
 
 }
 
@@ -2145,6 +2208,35 @@ func (a *Client) GetCollectorByID(params *GetCollectorByIDParams) (*GetCollector
 		return nil, err
 	}
 	return result.(*GetCollectorByIDOK), nil
+
+}
+
+/*
+GetLmotelCollectorByID gets collector
+*/
+func (a *Client) GetLmotelCollectorByID(params *GetLmotelCollectorByIDParams) (*GetLmotelCollectorByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetLmotelCollectorByIDParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getCollectorById",
+		Method:             "GET",
+		PathPattern:        "/setting/collectors/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetLmotelCollectorByIDReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetLmotelCollectorByIDOK), nil
 
 }
 
@@ -5714,6 +5806,36 @@ func (a *Client) UpdateCollectorByID(params *UpdateCollectorByIDParams) (*Update
 	return result.(*UpdateCollectorByIDOK), nil
 
 }
+
+/*
+UpdateLmotelCollectorByID updates collector
+
+func (a *Client) UpdateLmotelCollectorByID(params *UpdateLmotelCollectorByIDParams) (*UpdateLmotelCollectorByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateLmotelCollectorByIDParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "updateCollectorById",
+		Method:             "PUT",
+		PathPattern:        "/setting/collectors/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &UpdateLmotelCollectorByIDReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UpdateLmotelCollectorByIDOK), nil
+
+}
+*/
 
 /*
 UpdateCollectorGroupByID updates collector group
