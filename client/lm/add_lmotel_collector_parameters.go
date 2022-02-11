@@ -32,6 +32,7 @@ func NewAddLmotelCollectorParams() *AddLmotelCollectorParams {
 	*/
 	return &AddLmotelCollectorParams{
 		// HTTPClient: httpClient,
+		Headers: http.Header{"X-version": []string{"4"}},
 		timeout: cr.DefaultTimeout,
 	}
 }
@@ -70,6 +71,7 @@ for the add collector operation typically these are written to a http.Request
 */
 type AddLmotelCollectorParams struct {
 
+	Headers    http.Header
 	/*Body*/
 	Body *models.LmotelCollector
 
@@ -135,7 +137,9 @@ func (o *AddLmotelCollectorParams) WriteToRequest(r runtime.ClientRequest, reg s
 			return err
 		}
 	}
-
+	for header, value := range o.Headers {
+        r.SetHeaderParam(header, value...)
+    }
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}

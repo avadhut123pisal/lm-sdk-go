@@ -254,7 +254,7 @@ func (a *Client) AddLmotelCollector(params *AddLmotelCollectorParams) (*AddLmote
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &AddLmotelCollectorReader{formats: a.formats}, // Need to add new file add_lmotel_collector_responses.go
+		Reader:             &AddLmotelCollectorReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,

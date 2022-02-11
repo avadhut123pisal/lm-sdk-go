@@ -24,15 +24,8 @@ import (
 // with the default values initialized.
 func NewGetLmotelCollectorByIDParams() *GetLmotelCollectorByIDParams {
 	var ()
-	// Added to Skip SSL verification
-	// transport := http.DefaultTransport.(*http.Transport).Clone()
-    // transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12}
-    // clientTransport := (http.RoundTripper)(transport)
-	// httpClient := &http.Client{Transport: clientTransport, Timeout: 0}
-	// Added to Skip SSL verification
-
 	return &GetLmotelCollectorByIDParams{
-		// HTTPClient: httpClient, // Added 
+		Headers: http.Header{"X-version": []string{"4"}},
 		timeout: cr.DefaultTimeout,
 	}
 }
@@ -71,6 +64,7 @@ for the get collector by Id operation typically these are written to a http.Requ
 */
 type GetLmotelCollectorByIDParams struct {
 
+	Headers    http.Header
 	/*Fields*/
 	Fields *string
 	/*ID*/
@@ -164,7 +158,9 @@ func (o *GetLmotelCollectorByIDParams) WriteToRequest(r runtime.ClientRequest, r
 	if err := r.SetPathParam("id", swag.FormatInt32(o.ID)); err != nil {
 		return err
 	}
-
+	for header, value := range o.Headers {
+        r.SetHeaderParam(header, value...)
+    }
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}

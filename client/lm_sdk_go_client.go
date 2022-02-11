@@ -16,6 +16,7 @@ import (
 	"strconv"
 	"time"
 	"log"
+	"strings"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -175,6 +176,18 @@ func LMv1Auth(accessId, accessKey string) runtime.ClientAuthInfoWriter {
 		signature := base64.StdEncoding.EncodeToString([]byte(hexDigest))
 		r.SetHeaderParam("Authorization", fmt.Sprintf("LMv1 %s:%s:%s", accessId, signature, epoch))
 		log.Printf("LMv1 %s:%s:%s", accessId, signature, epoch)
-		return r.SetHeaderParam("X-version", "4")
+
+		var isXversionSpecified bool
+        for existingHeaderName, _ := range r.GetHeaderParams() {
+            if strings.EqualFold(existingHeaderName, "X-version") {
+				isXversionSpecified = true
+                break
+            }
+        }
+		if !isXversionSpecified {
+			r.SetHeaderParam("X-version", "2")
+		}
+		log.Printf("Header %v", r.GetHeaderParams())
+		return nil
 	})
 }

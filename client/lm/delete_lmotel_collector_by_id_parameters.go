@@ -23,14 +23,8 @@ import (
 // with the default values initialized.
 func NewDeleteLmotelCollectorByIDParams() *DeleteLmotelCollectorByIDParams {
 	var ()
-	// Added to Skip SSL verification
-	// transport := http.DefaultTransport.(*http.Transport).Clone()
-	// transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12}
-	// clientTransport := (http.RoundTripper)(transport)
-	// httpClient := &http.Client{Transport: clientTransport, Timeout: 0}
-	// Added to Skip SSL verification
 	return &DeleteLmotelCollectorByIDParams{
-		// HTTPClient: httpClient, // Added
+		Headers: http.Header{"X-version": []string{"4"}},
 		timeout: cr.DefaultTimeout,
 	}
 }
@@ -68,7 +62,7 @@ func NewDeleteLmotelCollectorByIDParamsWithHTTPClient(client *http.Client) *Dele
 for the delete collector by Id operation typically these are written to a http.Request
 */
 type DeleteLmotelCollectorByIDParams struct {
-
+	Headers    http.Header
 	/*ID*/
 	ID int32
 
@@ -133,7 +127,9 @@ func (o *DeleteLmotelCollectorByIDParams) WriteToRequest(r runtime.ClientRequest
 	if err := r.SetPathParam("id", swag.FormatInt32(o.ID)); err != nil {
 		return err
 	}
-
+	for header, value := range o.Headers {
+        r.SetHeaderParam(header, value...)
+    }
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
