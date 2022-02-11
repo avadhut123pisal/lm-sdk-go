@@ -8,8 +8,6 @@ package lm
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
-	"log"
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -25,12 +23,6 @@ type AddCollectorReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *AddCollectorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 
-	responseData, err := ioutil.ReadAll(response.Body())
-    if err != nil {
-        log.Fatal(err)
-    }
-    responseString := string(responseData)
-    log.Println(responseString)
 	switch response.Code() {
 
 	case 200:

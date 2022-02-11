@@ -25,12 +25,6 @@ type AddLmotelCollectorReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *AddLmotelCollectorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 
-	// responseData, err := ioutil.ReadAll(response.Body())
-    // if err != nil {
-    //     log.Fatal(err)
-    // }
-    // responseString := string(responseData)
-    // log.Println(responseString)
 	switch response.Code() {
 
 	case 200:
